@@ -11,7 +11,7 @@ const getUser = () => {
   return;
 }
 const getAllUsers = () => {
-  return;
+  return "";
 }
 
 module.exports = {
