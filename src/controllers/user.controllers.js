@@ -1,22 +1,34 @@
+const { 
+  createUser, 
+    getAllUsers, 
+    deleteUser, 
+    getUser, 
+    updateUser 
+  } = require("../services/user.services")
 
 const getAllUsers = (req, res) => {
+  const users = getAllUsers();
   res.send("get all user")
 }
 
 const getUser = (req,res) => {
-    res.send("get user");
+  const user = getUser(req.params.userId)
+  res.send("get user");
 }
 
 const createUser = (req,res) => {
-    res.send("post user");
+  const createdUser = createUser(req.params.userId)
+  res.send("post user");
 }
 
 const updateUser = (req,res) => {
-    res.send("patch user");
+  const update = updateUser(req.params.userId)
+  res.send("patch user");
 }
 
 const deleteUser = (req,res) => {
-    res.send("delete user");
+  deleteUser(req.params.userId)
+  res.send("delete user");
 }
 
 module.exports = {
