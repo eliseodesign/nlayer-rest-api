@@ -1,0 +1,28 @@
+@baseUrl = http://localhost:3001/v1
+
+### GET
+GET {{baseUrl}}/users
+
+### POST /users
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "Elizatbeth",
+  "email": "eli@example.com",
+  "password": "123456"
+}
+
+### UPDATE /users
+PATCH  {{baseUrl}}/users/3
+Content-Type: application/json
+
+{
+  "name": "JUANCITO",
+  "email": "juancito.mecanico@juan.com",
+  "password": "123456"
+}
+
+### DELETE user
+
+DELETE  {{baseUrl}}/users/5

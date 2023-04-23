@@ -4,13 +4,17 @@
   "description": "Project rest API using express with sqlite3",
   "main": "index.js",
   "scripts": {
+    "dev":"nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "eliseodesgin",
+  "author": "@eliseodesign",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
     "md5": "^2.3.0",
     "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
