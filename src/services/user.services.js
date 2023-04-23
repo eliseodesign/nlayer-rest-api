@@ -1,13 +1,36 @@
 const db = require("../database/database")
+const md5 = require("md5")
 const deleteUser = () => {
   return;
 }
 const updateUser = () => {
   return;
 }
-const createUser = () => {
-  return;
+//POST
+const createUser = (req) => {
+  
+  const data = {
+      name: req.body.name,
+      email: req.body.email,
+      password : md5(req.body.password)
+  }
+  var sql ='INSERT INTO user (name, email, password) VALUES (?,?,?)'
+  var params =[data.name, data.email, data.password]
+
+  return new Promise( (res,rej) => 
+    db.run(sql, params,function(err, result) {
+      err 
+        ? rej(err)
+        : res({
+          "message": "success",
+          "data": data,
+          "id" : this.lastID
+        })
+      }
+    )
+  )
 }
+//GET
 const getUser = (id) => {
   var sql = "SELECT * FROM user WHERE id = ?"
     var params = [id]
@@ -22,7 +45,7 @@ const getUser = (id) => {
     )
 }
 
-
+//GET ALL
 const getAllUsers = () => {
   const sql = "SELECT * FROM user";
   const params = [];

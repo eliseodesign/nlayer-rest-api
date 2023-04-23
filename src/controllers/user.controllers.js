@@ -13,8 +13,24 @@ const getUser = (req,res) => {
 }
 
 const createUser = (req,res) => {
-  const createdUser = service.createUser(req.params.userId)
-  res.send("post user");
+  const errors=[]
+  if (!req.body.name){
+    errors.push("No password specified");
+}
+  if (!req.body.password){
+      errors.push("No password specified");
+  }
+  if (!req.body.email){
+      errors.push("No email specified");
+  }
+  if (errors.length){
+      res.status(400).json({"error":errors.join(",")});
+      return;
+  }
+  service.createUser(req)
+    .then( user => res.json(user))
+    .catch( e => res.status(404).json(e))
+
 }
 
 const updateUser = (req,res) => {

@@ -15,7 +15,7 @@ router
 
   .get("/:id", getUser)
 
-  .post("/:id", createUser)
+  .post("/", createUser)
 
   .patch("/:id", updateUser)
 
