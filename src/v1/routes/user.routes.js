@@ -13,12 +13,12 @@ const {
 router
   .get("/", getAllUsers)
 
-  .get("/:UserId", getUser)
+  .get("/:id", getUser)
 
-  .post("/:UserId", createUser)
+  .post("/:id", createUser)
 
-  .patch("/:UserId", updateUser)
+  .patch("/:id", updateUser)
 
-  .delete("/:UserId", deleteUser)
+  .delete("/:id", deleteUser)
 
 module.exports = router;

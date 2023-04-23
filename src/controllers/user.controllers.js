@@ -1,27 +1,29 @@
-const controller = require("../services/user.services")
+const service = require("../services/user.services")
 
 const getAllUsers = (req, res) => {
-  const users = controller.getAllUsers();
-  res.send("get all user")
+  service.getAllUsers(res)
+    .then( rows => res.json(rows))
+    .catch( e => res.status(404).json(e))
 }
 
 const getUser = (req,res) => {
-  const user = controller.getUser(req.params.userId)
-  res.send("get user");
+  service.getUser(req.params.id)
+    .then( rows => res.json(rows))
+    .catch( e => res.status(404).json(e))
 }
 
 const createUser = (req,res) => {
-  const createdUser = controller.createUser(req.params.userId)
+  const createdUser = service.createUser(req.params.userId)
   res.send("post user");
 }
 
 const updateUser = (req,res) => {
-  const update = controller.updateUser(req.params.userId)
+  const update = service.updateUser(req.params.userId)
   res.send("patch user");
 }
 
 const deleteUser = (req,res) => {
-  controller.deleteUser(req.params.userId)
+  service.deleteUser(req.params.userId)
   res.send("delete user");
 }
 
