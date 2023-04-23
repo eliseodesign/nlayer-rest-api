@@ -1,7 +1,17 @@
 const db = require("../database/database")
 const md5 = require("md5")
-const deleteUser = () => {
-  return;
+
+const deleteUser = (id) => {
+  return new Promise( (res,rej) =>
+    db.run(
+      'DELETE FROM user WHERE id = ?',
+      id,
+      function (err, result) {
+        err
+          ? rej(err)
+          : res({"message":"deleted", changes: this.changes})
+    })
+  )
 }
 const updateUser = () => {
   return;

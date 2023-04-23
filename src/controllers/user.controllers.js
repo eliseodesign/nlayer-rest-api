@@ -2,13 +2,13 @@ const service = require("../services/user.services")
 
 const getAllUsers = (req, res) => {
   service.getAllUsers(res)
-    .then( rows => res.json(rows))
+    .then( resul => res.json(resul))
     .catch( e => res.status(404).json(e))
 }
 
 const getUser = (req,res) => {
   service.getUser(req.params.id)
-    .then( rows => res.json(rows))
+    .then( resul => res.json(resul))
     .catch( e => res.status(404).json(e))
 }
 
@@ -28,7 +28,7 @@ const createUser = (req,res) => {
       return;
   }
   service.createUser(req)
-    .then( user => res.json(user))
+    .then( resul => res.json(resul))
     .catch( e => res.status(404).json(e))
 
 }
@@ -39,8 +39,10 @@ const updateUser = (req,res) => {
 }
 
 const deleteUser = (req,res) => {
-  service.deleteUser(req.params.userId)
-  res.send("delete user");
+  service.deleteUser(req.params.id)
+    .then( resul => res.json(resul))
+    .catch( e => res.status(404).json(e))
+    
 }
 
 module.exports = {

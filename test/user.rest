@@ -1,15 +1,18 @@
 @baseUrl = http://localhost:3001/v1/
 
+### GET
+GET http://localhost:3001/v1/users
+
 ### POST /users
 POST http://localhost:3001/v1/users
 Content-Type: application/json
 
 {
-  "name": "Ho",
-  "email": "ho@example.com",
+  "name": "Elizatbeth",
+  "email": "eli@example.com",
   "password": "123456"
 }
 
-### GET
+### DELETE user
 
-GET http://localhost:3001/v1/users
+DELETE  http://localhost:3001/v1/users/1
