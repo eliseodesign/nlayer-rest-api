@@ -13,8 +13,31 @@ const deleteUser = (id) => {
     })
   )
 }
-const updateUser = () => {
-  return;
+const updateUser = (req) => {
+    var data = {
+      name: req.body.name,
+      email: req.body.email,
+      password : req.body.password ? md5(req.body.password) : null
+  }
+  return new Promise( (res,rej) =>
+    db.run(
+      `UPDATE user set 
+        name = COALESCE(?,name), 
+        email = COALESCE(?,email), 
+        password = COALESCE(?,password) 
+        WHERE id = ?`,
+      [data.name, data.email, data.password, req.params.id],
+      function (err, result) {
+
+        err
+          ? rej(err)
+          : res({
+            message: "success",
+            data: data,
+            changes: this.changes
+        })
+    })  
+  )
 }
 //POST
 const createUser = (req) => {

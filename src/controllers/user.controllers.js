@@ -34,8 +34,9 @@ const createUser = (req,res) => {
 }
 
 const updateUser = (req,res) => {
-  const update = service.updateUser(req.params.userId)
-  res.send("patch user");
+  service.updateUser(req)
+    .then( resul => res.json(resul))
+    .catch( e => res.status(400).json(e))
 }
 
 const deleteUser = (req,res) => {
