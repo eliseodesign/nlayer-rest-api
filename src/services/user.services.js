@@ -1,7 +1,8 @@
 const db = require("../database/database")
 const md5 = require("md5")
 
-function deleteUser (id) {
+//DELETE
+const deleteUser = (id) => {
   return new Promise( (res,rej) =>
     db.run(
       'DELETE FROM User WHERE Id = ?',
@@ -14,7 +15,7 @@ function deleteUser (id) {
   )
 }
 
-
+//UPDATE
 const updateUser = (req) => {
   const data = {
     Name: req.body.Name,
@@ -50,7 +51,7 @@ const createUser = (req) => {
       Name: req.body.Name,
       Email: req.body.Email,
       Password : md5(req.body.Password),
-      Id_typeUser:req.body.Id_typeUse
+      Id_typeUser:req.body.Id_typeUser
   }
   var sql ='INSERT INTO User (Name, Email, Password, Id_typeUser) VALUES (?,?,?,?)'
   var params =[data.Name, data.Email, data.Password, data.Id_typeUser]
@@ -96,8 +97,6 @@ const getAllUsers = () => {
     )
   );
 };
-
-
 
 module.exports = {
   deleteUser,

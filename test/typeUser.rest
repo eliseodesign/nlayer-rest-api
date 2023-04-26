@@ -1,18 +1,18 @@
-@baseUrl = http://localhost:3001/v1
+@baseUrl = http://localhost:3001/v1/typeUsers
 
 ### GET
-GET {{baseUrl}}/users
+GET {{baseUrl}}
 
 ### POST /typeUsers
-POST {{baseUrl}}/typeUsers
+POST {{baseUrl}}
 Content-Type: application/json
 
 {
-  "Name": "Admin",
+  "Name": "Pollo"
 }
 
 ### UPDATE /typeUsers
-PATCH  {{baseUrl}}/typeUsers/3
+PATCH  {{baseUrl}}/3
 Content-Type: application/json
 
 {
@@ -22,5 +22,4 @@ Content-Type: application/json
 }
 
 ### DELETE user
-
-DELETE  {{baseUrl}}/typeUsers/1
+DELETE  {{baseUrl}}/4

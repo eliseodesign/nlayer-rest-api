@@ -1,21 +1,21 @@
-@baseUrl = http://localhost:3001/v1
+@baseUrl = http://localhost:3001/v1/users
 
 ### GET
-GET {{baseUrl}}/users
+GET {{baseUrl}}
 
 ### POST /users
-POST {{baseUrl}}/users
+POST {{baseUrl}}
 Content-Type: application/json
 
 {
   "Name": "Daniel",
   "Email": "daniel@example.com",
   "Password": "123456",
-  "Id_typeUser":1
+  "Id_typeUser":10
 }
 
 ### UPDATE /users
-PATCH  {{baseUrl}}/users/3
+PATCH  {{baseUrl}}/3
 Content-Type: application/json
 
 {
@@ -26,4 +26,4 @@ Content-Type: application/json
 
 ### DELETE user
 
-DELETE  {{baseUrl}}/users/1
+DELETE  {{baseUrl}}/1
