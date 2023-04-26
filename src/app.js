@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use("/v1/users", v1UserRouter);
-// app.use("/v1/typeUsers", v1TypeUserRouter);
+app.use("/v1/typeUsers", v1TypeUserRouter);
 
 
 module.exports = app;

@@ -1,55 +1,54 @@
-var sqlite3 = require('sqlite3').verbose()
-var md5 = require('md5')
+var sqlite3 = require('sqlite3').verbose();
+var md5 = require('md5');
 
-const DBSOURCE = "db.sqlite"
+const DBSOURCE = "db.sqlite";
 
 let db = new sqlite3.Database(DBSOURCE, (err) => {
     if (err) {
-      // Cannot open database
-      console.error(err.message)
-      throw err
-    }else{
-        console.log('Connected to the SQLite database.')
-        db.run("PRAGMA foreign_keys = ON;")
-        
+        console.error(err.message);
+        throw err;
+    } else {
+        console.log('Connected to the SQLite database.');
+        db.run("PRAGMA foreign_keys = ON;");
+
         db.run(`
             CREATE TABLE TypeUser (
-            Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            Name text, 
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                Name TEXT
             );
-            
-
-            `,
+        `,
         (err) => {
             if (err) {
                 // Table already created
-            }else{
+                console.log("ya existia tabla typeuser")
+            } else {
                 // Table just created, creating some rows
-                // var insert = 'INSERT INTO TypeUser (Name) VALUES (?)'
-                db.run(insert, ["admin"])
-                db.run(insert, ["user"])
+                var insert = 'INSERT INTO TypeUser (Name) VALUES (?)';
+                db.run(insert, ["admin"]);
+                db.run(insert, ["user"]);
             }
-        }); 
-        
-        db.run(
-            `
+        });
+
+        db.run(`
             CREATE TABLE User (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                Name text, 
-                Email text UNIQUE, 
-                Password text, 
+                Name TEXT,
+                Email TEXT UNIQUE,
+                Password TEXT,
                 Id_typeUser INTEGER,
-                FOREIGN KEY (id_typeUser) REFERENCES TypeUser(Id)
-                CONSTRAINT email_unique UNIQUE (email)
+                FOREIGN KEY (Id_typeUser) REFERENCES TypeUser(Id),
+                CONSTRAINT email_unique UNIQUE (Email)
             );
-            `,
-            (err)=> err? console.log(err):null
-            
-            )
-
-
+        `,
+        (err) => {
+            if (err) {
+                // Table already createdc
+                console.log("ya existia tabla users")
+            } else {
+                // Table just created
+            }
+        });
     }
 });
 
-
-module.exports = db
+module.exports = db;

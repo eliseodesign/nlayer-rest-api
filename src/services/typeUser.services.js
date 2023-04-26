@@ -28,7 +28,6 @@ const updateR = (req) => {
           ? rej(err)
           : res({
             message: "success",
-            data: data,
             changes: this.changes
         })
     })  
@@ -38,15 +37,14 @@ const updateR = (req) => {
 const createR = (req) => {
   
   var sql ='INSERT INTO TypeUser (Name) VALUES (?)'
-  var params =[req.body.Name]
 
   return new Promise( (res,rej) => 
-    db.run(sql, params,function(err, result) {
+    db.run(sql, [req.body.Name],function(err, result) {
       err 
         ? rej(err)
         : res({
           "message": "success",
-          "data": data,
+          "data": result,
           "id" : this.lastID
         })
       }

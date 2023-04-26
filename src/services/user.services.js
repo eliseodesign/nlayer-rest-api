@@ -50,7 +50,7 @@ const createUser = (req) => {
       Name: req.body.Name,
       Email: req.body.Email,
       Password : md5(req.body.Password),
-      Id_typeUser:req.body.Id_typeUse
+      Id_typeUser:req.body.Id_typeUser
   }
   var sql ='INSERT INTO User (Name, Email, Password, Id_typeUser) VALUES (?,?,?,?)'
   var params =[data.Name, data.Email, data.Password, data.Id_typeUser]
