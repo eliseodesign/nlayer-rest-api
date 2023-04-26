@@ -1,10 +1,10 @@
 const db = require("../database/database")
 const md5 = require("md5")
 
-function deleteUser (id) {
+function deleteR(id) {
   return new Promise( (res,rej) =>
     db.run(
-      'DELETE FROM User WHERE Id = ?',
+      'DELETE FROM TypeUser WHERE Id = ?',
       id,
       function (err, result) {
         err
@@ -15,22 +15,13 @@ function deleteUser (id) {
 }
 
 
-const updateUser = (req) => {
-  const data = {
-    Name: req.body.Name,
-    Email: req.body.Email,
-    Password : md5(req.body.Password),
-    Id_typeUser:req.body.Id_typeUse
-  }
+const updateR = (req) => {
   return new Promise( (res,rej) =>
     db.run(
       `UPDATE User set 
-        Name = COALESCE(?,Name), 
-        Email = COALESCE(?,Email), 
-        Password = COALESCE(?,Password) ,
-        Id_typeUser = COALESCE(?,Id_typeUser) ,
+        Name = COALESCE(?,Name)
         WHERE Id = ?`,
-      [data.Name, data.Email, data.Password, data.Id_typeUser, req.params.Id],
+      [req.body.Name, req.body.Id],
       function (err, result) {
 
         err
@@ -44,16 +35,10 @@ const updateUser = (req) => {
   )
 }
 //POST
-const createUser = (req) => {
+const createR = (req) => {
   
-  const data = {
-      Name: req.body.Name,
-      Email: req.body.Email,
-      Password : md5(req.body.Password),
-      Id_typeUser:req.body.Id_typeUse
-  }
-  var sql ='INSERT INTO User (Name, Email, Password, Id_typeUser) VALUES (?,?,?,?)'
-  var params =[data.Name, data.Email, data.Password, data.Id_typeUser]
+  var sql ='INSERT INTO TypeUser (Name) VALUES (?)'
+  var params =[req.body.Name]
 
   return new Promise( (res,rej) => 
     db.run(sql, params,function(err, result) {
@@ -69,8 +54,8 @@ const createUser = (req) => {
   )
 }
 //GET
-const getUser = (id) => {
-  var sql = "SELECT * FROM User WHERE Id = ?"
+const getR = (id) => {
+  var sql = "SELECT * FROM TypeUser WHERE Id = ?"
     var params = [id]
     
     return new Promise((res, rej)=> 
@@ -84,8 +69,8 @@ const getUser = (id) => {
 }
 
 //GET ALL
-const getAllUsers = () => {
-  const sql = "SELECT * FROM User";
+const getAllR = () => {
+  const sql = "SELECT * FROM TypeUser";
   const params = [];
 
   return new Promise((res, rej) =>
@@ -100,9 +85,9 @@ const getAllUsers = () => {
 
 
 module.exports = {
-  deleteUser,
-  updateUser,
-  createUser,
-  getUser,
-  getAllUsers
+  deleteR,
+  updateR,
+  createR,
+  getR,
+  getAllR
 }
