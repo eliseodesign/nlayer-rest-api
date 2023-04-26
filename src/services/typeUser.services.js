@@ -18,7 +18,7 @@ function deleteR(id) {
 const updateR = (req) => {
   return new Promise( (res,rej) =>
     db.run(
-      `UPDATE User set 
+      `UPDATE TypeUser set 
         Name = COALESCE(?,Name)
         WHERE Id = ?`,
       [req.body.Name, req.body.Id],
