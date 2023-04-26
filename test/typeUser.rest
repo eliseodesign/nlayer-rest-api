@@ -3,19 +3,16 @@
 ### GET
 GET {{baseUrl}}/users
 
-### POST /users
-POST {{baseUrl}}/users
+### POST /typeUsers
+POST {{baseUrl}}/typeUsers
 Content-Type: application/json
 
 {
-  "Name": "Daniel",
-  "Email": "daniel@example.com",
-  "Password": "123456",
-  "Id_typeUser":1
+  "Name": "Admin",
 }
 
-### UPDATE /users
-PATCH  {{baseUrl}}/users/3
+### UPDATE /typeUsers
+PATCH  {{baseUrl}}/typeUsers/3
 Content-Type: application/json
 
 {
@@ -26,4 +23,4 @@ Content-Type: application/json
 
 ### DELETE user
 
-DELETE  {{baseUrl}}/users/1
+DELETE  {{baseUrl}}/typeUsers/1
