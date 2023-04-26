@@ -1,7 +1,7 @@
 const service = require("../services/user.services")
 
 const getAllUsers = (req, res) => {
-  service.getAllUsers(res)
+  service.getAllUsers()
     .then( resul => res.json(resul))
     .catch( e => res.status(404).json(e))
 }
@@ -14,15 +14,18 @@ const getUser = (req,res) => {
 
 const createUser = (req,res) => {
   const errors=[]
-  if (!req.body.name){
+  if (!req.body.Name){
     errors.push("No password specified");
 }
-  if (!req.body.password){
+  if (!req.body.Password){
       errors.push("No password specified");
   }
-  if (!req.body.email){
+  if (!req.body.Email){
       errors.push("No email specified");
   }
+  if (!req.body.Id_typeUser){
+    errors.push("No Id_typeUser specified");
+}
   if (errors.length){
       res.status(400).json({"error":errors.join(",")});
       return;

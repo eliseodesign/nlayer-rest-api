@@ -1,10 +1,10 @@
 const db = require("../database/database")
 const md5 = require("md5")
 
-const deleteUser = (id) => {
+function deleteUser (id) {
   return new Promise( (res,rej) =>
     db.run(
-      'DELETE FROM user WHERE id = ?',
+      'DELETE FROM user WHERE Id = ?',
       id,
       function (err, result) {
         err
@@ -13,20 +13,24 @@ const deleteUser = (id) => {
     })
   )
 }
+
+
 const updateUser = (req) => {
-    var data = {
-      name: req.body.name,
-      email: req.body.email,
-      password : req.body.password ? md5(req.body.password) : null
+  const data = {
+    Name: req.body.Name,
+    Email: req.body.Email,
+    Password : md5(req.body.Password),
+    Id_typeUser:req.body.Id_typeUse
   }
   return new Promise( (res,rej) =>
     db.run(
-      `UPDATE user set 
-        name = COALESCE(?,name), 
-        email = COALESCE(?,email), 
-        password = COALESCE(?,password) 
-        WHERE id = ?`,
-      [data.name, data.email, data.password, req.params.id],
+      `UPDATE User set 
+        Name = COALESCE(?,Name), 
+        Email = COALESCE(?,Email), 
+        Password = COALESCE(?,Password) ,
+        Id_typeUser = COALESCE(?,Id_typeUser) ,
+        WHERE Id = ?`,
+      [data.Name, data.Email, data.Password, data.Id_typeUser],
       function (err, result) {
 
         err
@@ -43,12 +47,13 @@ const updateUser = (req) => {
 const createUser = (req) => {
   
   const data = {
-      name: req.body.name,
-      email: req.body.email,
-      password : md5(req.body.password)
+      Name: req.body.Name,
+      Email: req.body.Email,
+      Password : md5(req.body.Password),
+      Id_typeUser:req.body.Id_typeUse
   }
-  var sql ='INSERT INTO user (name, email, password) VALUES (?,?,?)'
-  var params =[data.name, data.email, data.password]
+  var sql ='INSERT INTO User (Name, Email, Password, Id_typeUser) VALUES (?,?,?,?)'
+  var params =[data.Name, data.Email, data.Password, data.Id_typeUser]
 
   return new Promise( (res,rej) => 
     db.run(sql, params,function(err, result) {
@@ -65,7 +70,7 @@ const createUser = (req) => {
 }
 //GET
 const getUser = (id) => {
-  var sql = "SELECT * FROM user WHERE id = ?"
+  var sql = "SELECT * FROM user WHERE Id = ?"
     var params = [id]
     
     return new Promise((res, rej)=> 
@@ -80,7 +85,7 @@ const getUser = (id) => {
 
 //GET ALL
 const getAllUsers = () => {
-  const sql = "SELECT * FROM user";
+  const sql = "SELECT * FROM User";
   const params = [];
 
   return new Promise((res, rej) =>

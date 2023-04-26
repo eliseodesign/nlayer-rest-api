@@ -10,23 +10,37 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
       throw err
     }else{
         console.log('Connected to the SQLite database.')
-        db.run(`CREATE TABLE user (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name text, 
-            email text UNIQUE, 
-            password text, 
-            CONSTRAINT email_unique UNIQUE (email)
-            )`,
+        db.run("PRAGMA foreign_keys = ON;")
+        db.run(`
+            CREATE TABLE TypeUser (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name text, 
+            );
+            
+            `,
         (err) => {
             if (err) {
                 // Table already created
             }else{
                 // Table just created, creating some rows
-                var insert = 'INSERT INTO user (name, email, password) VALUES (?,?,?)'
-                db.run(insert, ["admin","admin@example.com",md5("admin123456")])
-                db.run(insert, ["user","user@example.com",md5("user123456")])
+                var insert = 'INSERT INTO TypeUser (Name) VALUES (?)'
+                db.run(insert, ["admin"])
+                db.run(insert, ["user"])
             }
         });  
+
+        db.run(`
+        CREATE TABLE User (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name text, 
+            Email text UNIQUE, 
+            Password text, 
+            Id_typeUser INTEGER,
+            FOREIGN KEY (id_typeUser) REFERENCES TypeUser(Id)
+            CONSTRAINT email_unique UNIQUE (email)
+        );`
+        
+        )
     }
 });
 

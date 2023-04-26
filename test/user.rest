@@ -8,9 +8,10 @@ POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
-  "name": "Elizatbeth",
-  "email": "eli@example.com",
-  "password": "123456"
+  "Name": "Daniel",
+  "Email": "daniel@example.com",
+  "Password": "123456",
+  "Id_typeUser":1
 }
 
 ### UPDATE /users
@@ -25,4 +26,4 @@ Content-Type: application/json
 
 ### DELETE user
 
-DELETE  {{baseUrl}}/users/5
+DELETE  {{baseUrl}}/users/1
